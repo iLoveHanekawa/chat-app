@@ -1,0 +1,31 @@
+{
+  "name": "chat-app",
+  "version": "1.0.0",
+  "description": "practice chat app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon src/app.ts",
+    "build": "tsc -p ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iLoveHanekawa/chat-app.git"
+  },
+  "author": "iLoveHanekawa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iLoveHanekawa/chat-app/issues"
+  },
+  "homepage": "https://github.com/iLoveHanekawa/chat-app#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^17.0.39",
+    "nodemon": "^2.0.16",
+    "ts-node": "^10.8.0",
+    "typescript": "^4.7.2"
+  },
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}

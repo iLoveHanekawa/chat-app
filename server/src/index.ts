@@ -1,10 +1,16 @@
 import express from 'express'
 import { connectDB } from './db/connect'
 import { config } from 'dotenv'
+require('express-async-errors') //bruh
+import authRouter from './routes/auth'
 config()
 
 
 const app: express.Express = express()
+
+app.use(express.json())
+
+app.use('/api/v1/auth', authRouter)
 
 app.get('/', (req: express.Request, res: express.Response) => {
     res.send(`<h1>Welcome</h1>`)

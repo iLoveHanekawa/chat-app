@@ -3,3 +3,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.sent {
+    @apply bg-teal-400 self-end rounded-l-xl rounded-tr-xl px-5 py-2 my-1 text-white
+}
+
+.received {
+    @apply border-teal-400 self-start rounded-r-xl border-2 text-teal-400 my-1 px-5 py-2 rounded-tl-xl
+}

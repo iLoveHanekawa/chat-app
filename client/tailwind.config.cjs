@@ -8,6 +8,9 @@ module.exports = {
       brightness: {
         25: .25
       },
+      maxWidth: {
+        '1/2': '50%'
+      },
       width: {
         nvw: "97vw"
       },

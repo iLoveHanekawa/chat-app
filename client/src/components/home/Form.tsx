@@ -1,4 +1,4 @@
-import React, { SetStateAction } from 'react'
+import React, { MutableRefObject, SetStateAction } from 'react'
 import { Socket } from 'socket.io-client'
 import { DefaultEventsMap } from 'socket.io/dist/typed-events'
 import axios from 'axios'
@@ -10,6 +10,7 @@ type FormType = {
 }[]>>
   socket: Socket<DefaultEventsMap, DefaultEventsMap> | null
   active: number
+  listRef: MutableRefObject<HTMLDivElement | null>
 }
 
 
@@ -34,8 +35,8 @@ function Form(props: FormType) {
 }
 
   return (
-    <div className = 'w-screen border-l-2 border-gray-200'>
-        <div className = 'md:w-4/6 w-full border-l-2 absolute right-0 bottom-0'>
+    <div className = 'w-screen'>
+        <div className = 'md:w-4/6 w-full border-l-2 border-teal-100 absolute right-0 bottom-0'>
             <form onSubmit={(e) => {
               if(props.active > 0) userSubmit(e)
               else {
@@ -46,7 +47,7 @@ function Form(props: FormType) {
                 <input value = {text} onChange = {(e) => {
                   setText(e.currentTarget.value)
                 }} type = 'text' placeholder='Type messsage' className = 'text-gray-400 focus:outline-none indent-2 w-full' />
-                <button className = 'font-bold hover:scale-105 rounded-md py-2 px-4 w-20 transition duration-500 bg-teal-400 text-white'>Send</button>
+                <button className = 'font-bold hover:scale-105 rounded-md py-2 px-4 w-20 transition duration-500 bg-teal-500 text-white'>Send</button>
             </form>
         </div>
     </div>

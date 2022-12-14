@@ -40,6 +40,7 @@ require("dotenv/config");
 const openai_1 = require("openai");
 const http = __importStar(require("http"));
 const socket_io_1 = require("socket.io");
+const animals_1 = require("./animals");
 const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
 const server = http.createServer(app);
@@ -61,17 +62,17 @@ app.post('/api/v1/', (req, res) => __awaiter(void 0, void 0, void 0, function* (
     const { msg } = req.body.data;
     console.log(msg);
     const completion = yield openai.createCompletion({
-        model: "text-davinci-002",
+        model: "text-davinci-003",
         prompt: generatePrompt(msg),
         temperature: 0.6,
-        max_tokens: 1000
+        max_tokens: 2000
     });
     console.log(completion.data.choices[0].text);
     res.status(200).json({ result: completion.data.choices[0].text });
 }));
 function generatePrompt(str) {
-    const capitalizedAnimal = str[0].toUpperCase() + str.slice(1).toLowerCase();
-    console.log(capitalizedAnimal);
+    const capPrompt = str[0].toUpperCase() + str.slice(1).toLowerCase();
+    console.log(capPrompt);
     return str;
 }
 app.use((0, cors_1.default)());
@@ -82,6 +83,8 @@ const start = (port) => {
         console.log(`\x1b[33m`, ` http://localhost:${port}`);
     });
 };
+let idMap = {};
+let x = 1;
 io.on('connect', (socket) => {
     console.log(`User connected with id: ${socket.id}`);
     socket.on('disconnect', () => {
@@ -91,5 +94,20 @@ io.on('connect', (socket) => {
         console.log(msg);
         socket.broadcast.emit('message', msg);
     });
+    socket.on('newUser', id => {
+        const num = Math.floor(Math.random() * (animals_1.animals.length - 1));
+        socket.broadcast.emit('newUser', id, animals_1.animals[num]);
+        console.log('ctrl here');
+        x++;
+        idMap = Object.assign(Object.assign({}, idMap), { [id]: animals_1.animals[num] });
+    });
+    socket.on('oldUsers', (id) => __awaiter(void 0, void 0, void 0, function* () {
+        const sockets = yield io.fetchSockets();
+        sockets.forEach((val, index) => {
+            console.log(idMap);
+            if (val.id !== id)
+                io.to(id).emit('newUser', val.id, idMap[val.id]);
+        });
+    }));
 });
 start(port);

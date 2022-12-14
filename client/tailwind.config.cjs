@@ -5,6 +5,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontSize: {
+        vvl: '28rem',
+        vl: '16rem'
+      },
       brightness: {
         25: .25
       },

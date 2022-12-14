@@ -3,6 +3,7 @@ import 'dotenv/config'
 import { Configuration, OpenAIApi } from "openai";
 import * as http from 'http'
 import { Server } from 'socket.io'
+import { animals } from './animals'
 import cors from 'cors'
 
 const app = express()
@@ -31,10 +32,10 @@ app.post('/api/v1/', async (req: Request, res: Response) => {
   
   
   const completion = await openai.createCompletion({
-    model: "text-davinci-002",
+    model: "text-davinci-003",
     prompt: generatePrompt(msg),
     temperature: 0.6,
-    max_tokens: 1000
+    max_tokens: 2000
   });
   console.log(completion.data.choices[0].text);
   
@@ -42,9 +43,9 @@ app.post('/api/v1/', async (req: Request, res: Response) => {
 })
 
 function generatePrompt(str: string) {
-  const capitalizedAnimal =
+  const capPrompt =
     str[0].toUpperCase() + str.slice(1).toLowerCase();
-    console.log(capitalizedAnimal);
+    console.log(capPrompt);
   return str;
 }
 
@@ -59,6 +60,8 @@ const start = (port: number) => {
     })  
 }
 
+let idMap: { [key: string]: string } = {}
+let x = 1;
 io.on('connect', (socket) => {
   console.log(`User connected with id: ${socket.id}`);
   socket.on('disconnect', () => {
@@ -67,6 +70,20 @@ io.on('connect', (socket) => {
   socket.on('message', (msg) => {
     console.log(msg);
     socket.broadcast.emit('message', msg)
+  })
+  socket.on('newUser', id => {
+    const num = Math.floor(Math.random() * (animals.length - 1))
+    socket.broadcast.emit('newUser', id, animals[num])
+    console.log('ctrl here');
+    x++;
+    idMap = { ...idMap, [id]: animals[num]}
+  })  
+  socket.on('oldUsers', async (id) => {
+    const sockets = await io.fetchSockets() 
+    sockets.forEach((val, index) => {
+      console.log(idMap)
+      if(val.id !== id) io.to(id).emit('newUser', val.id, idMap[val.id])
+    })
   })
 })
 

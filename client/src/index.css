@@ -5,9 +5,13 @@
 @tailwind utilities;
 
 .sent {
-    @apply shadow-gray-200 shadow-sm bg-teal-400 self-end rounded-l-xl rounded-tr-xl px-5 py-2 my-1 text-white
+    @apply shadow-gray-200 shadow-sm bg-teal-500 self-end rounded-l-xl rounded-tr-xl px-5 py-2 my-1 text-white whitespace-pre-wrap
 }
 
 .received {
-    @apply shadow-gray-200 shadow-sm self-start rounded-r-xl text-teal-400 my-1 px-5 py-2 rounded-tl-xl
+    @apply shadow-gray-200 shadow-sm self-start rounded-r-xl text-gray-500 my-1 px-5 py-2 rounded-tl-xl whitespace-pre-wrap
+}
+
+.customScrollbar {
+    @apply scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-300
 }

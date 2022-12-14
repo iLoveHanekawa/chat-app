@@ -9,6 +9,7 @@ type ContactsType = {
     active: number
     setActive: React.Dispatch<SetStateAction<number>>
     socket: Socket<DefaultEventsMap, DefaultEventsMap> | null
+    setRecipient: React.Dispatch<SetStateAction<string>>
 }
 
 function Contacts(props: ContactsType) {
@@ -20,12 +21,13 @@ function Contacts(props: ContactsType) {
         })
     }, [])
   return (
-    <ul className = 'h-4/6 text-gray-500 flex flex-col'>
+    <ul className = 'h-4/6 scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-300 text-gray-500 flex flex-col'>
         {
             list.map(({id, animal}, index) => {
                 return <li onClick = {() => {
                     props.setActive(index)
-                }} className = {`${props.active === index? 'bg-teal-500 text-white': 'text-teal-400 hover:bg-teal-500'} cursor-pointer shadow-md hover:text-white transition duration-500 flex justify-start items-center gap-4 w-full pl-3 py-3 lg:text-6xl md:text-4xl sm:text-2xl`} key = {index}>{index === 0? <GiVintageRobot />: <FaUserCircle />}<div className = 'lg:text-lg md:text-md sm:text-sm'>{animal}</div></li>
+                    props.setRecipient(id)
+                }} className = {`${props.active === index? 'bg-teal-600 text-white': 'text-teal-600 hover:bg-teal-600'} cursor-pointer shadow-md hover:text-white transition duration-500 flex justify-start items-center gap-4 w-full pl-3 py-5 lg:text-5xl md:text-4xl sm:text-2xl`} key = {index}>{index === 0? <GiVintageRobot />: <FaUserCircle />}<div className = 'lg:text-lg md:text-md sm:text-sm'>{animal}</div></li>
             })
         }
     </ul>

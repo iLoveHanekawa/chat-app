@@ -11,6 +11,7 @@ type FormType = {
   socket: Socket<DefaultEventsMap, DefaultEventsMap> | null
   active: number
   listRef: MutableRefObject<HTMLDivElement | null>
+  recipient: string
 }
 
 
@@ -20,14 +21,14 @@ function Form(props: FormType) {
   const userSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     props.setMsgs(i => [...i, { isSent: true, msg: text }])
-    props.socket?.emit('message', text)
+    props.socket?.emit('message', text, props.recipient)
   }
   
   const botSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const res = await axios.post('/api/v1/', {
         data: {
-            msg: text
+            msg: text,
         }
     })
     const data = await res.data
@@ -47,7 +48,7 @@ function Form(props: FormType) {
                 <input value = {text} onChange = {(e) => {
                   setText(e.currentTarget.value)
                 }} type = 'text' placeholder='Type messsage' className = 'text-gray-400 focus:outline-none indent-2 w-full' />
-                <button className = 'font-bold hover:scale-105 rounded-md py-2 px-4 w-20 transition duration-500 bg-teal-500 text-white'>Send</button>
+                <button className = 'font-bold hover:scale-105 rounded-md py-2 px-4 w-20 transition duration-500 bg-teal-600 text-white'>Send</button>
             </form>
         </div>
     </div>

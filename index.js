@@ -90,9 +90,9 @@ io.on('connect', (socket) => {
     socket.on('disconnect', () => {
         console.log('User disconnected');
     });
-    socket.on('message', (msg) => {
-        console.log(msg);
-        socket.broadcast.emit('message', msg);
+    socket.on('message', (msg, sendTo) => {
+        console.log(sendTo);
+        socket.to(sendTo).emit('message', msg);
     });
     socket.on('newUser', id => {
         const num = Math.floor(Math.random() * (animals_1.animals.length - 1));

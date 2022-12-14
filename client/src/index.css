@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 .sent {
-    @apply shadow-gray-200 shadow-sm bg-teal-500 self-end rounded-l-xl rounded-tr-xl px-5 py-2 my-1 text-white whitespace-pre-wrap
+    @apply shadow-gray-200 shadow-sm bg-teal-600 self-end rounded-l-xl rounded-tr-xl px-5 py-2 my-1 text-white whitespace-pre-wrap
 }
 
 .received {

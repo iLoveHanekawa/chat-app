@@ -27,7 +27,9 @@ function App() {
             IntelliChat
           </div>
         </div>
-        <AiFillGithub className = 'text-white text-2xl mr-2' />
+        <a href='https://github.com/iLoveHanekawa/chat-app' target = "_blank">
+          <AiFillGithub className = 'text-white text-2xl mr-2' />
+        </a>
       </nav>
       <Routes>
         <Route path='/' element={<Splash setSocket = {setSocket}/>} />

@@ -10,7 +10,7 @@ const app = express()
 const server = http.createServer(app)
 const io = new Server(server, {
   cors: {
-    origin: 'https://chat-app-production-df1f.up.railway.app/',
+    origin: 'https://chat-app-puce-psi.vercel.app/',
     methods: ['POST', 'GET'],
     allowedHeaders: ["my-custom-header"],
     credentials: true

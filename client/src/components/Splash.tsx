@@ -24,7 +24,7 @@ function Splash(props: SplashType) {
                 </div>
                 <div className = 'text-xs md:text-sm mt-3 ml-10 text-teal-400 border-red-200'>A simple chat application with an AI assistant.</div>
                 <button onClick = {() => { 
-                    const socket = io('http://localhost:5000')
+                    const socket = io('https://chat-app-production-df1f.up.railway.app/')
                     socket.on('connect', () => {
                         socket.emit('newUser', socket.id)
                         socket.emit('oldUsers', socket.id)

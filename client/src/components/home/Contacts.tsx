@@ -26,7 +26,7 @@ function Contacts(props: ContactsType) {
     console.log(list);
     
   return (
-    <ul className = 'h-4/6 scrollbar-thin border-r-2 border-gray-200 scrollbar-thumb-rounded-full scrollbar-thumb-gray-300 text-gray-500 flex flex-col'>
+    <ul className = 'h-4/6 scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-300 text-gray-500 flex flex-col'>
         {
             list.map(({id, animal}, index) => {
                 return <li onClick = {() => {

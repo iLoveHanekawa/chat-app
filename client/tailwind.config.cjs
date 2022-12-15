@@ -9,11 +9,13 @@ module.exports = {
         vvl: '28rem',
         vl: '16rem'
       },
+      
       brightness: {
         25: .25
       },
       maxWidth: {
-        '1/2': '50%'
+        '1/2': '50%',
+        '4/5': '80%'
       },
       width: {
         nvw: "97vw"

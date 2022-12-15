@@ -32,10 +32,10 @@ function Home(props: HomeType) {
 
   return (
     <div className = 'w-screen h-screen relative'>
-      <div className = {`${props.hideNav? '': 'z-20'} md:hidden h-screen absolute top-0 left-0 w-1/2`}>
+      <div className = {`${props.hideNav? '': 'z-20'} md:hidden h-screen absolute top-0 left-0 w-2/3`}>
         <NavTray setHideNav = {props.setHideNav} hideNav = {props.hideNav} socket = {props.socket} />
       </div>
-      <div className = 'hidden md:w-2/6 flex-col absolute md:flex h-full left-0 top-0'>
+      <div className = 'hidden border-r-2 border-gray-200 md:w-2/6 flex-col absolute md:flex h-full left-0 top-0'>
         <div className = 'h-2/6 bg-teal-600 flex flex-col pt-24 pl-10'>
           <div className = 'text-white lg:text-5xl md:text-4xl text-3xl font-bold flex pr-5 items-end gap-3'>
             <div className = 'lg:text-7xl md:text-5xl text-4xl'>

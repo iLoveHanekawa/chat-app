@@ -43,6 +43,7 @@ const socket_io_1 = require("socket.io");
 const animals_1 = require("./animals");
 const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
+app.use((0, cors_1.default)());
 const server = http.createServer(app);
 const io = new socket_io_1.Server(server, {
     cors: {

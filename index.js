@@ -46,7 +46,7 @@ const app = (0, express_1.default)();
 const server = http.createServer(app);
 const io = new socket_io_1.Server(server, {
     cors: {
-        origin: 'http://127.0.0.1:5173/',
+        origin: 'https://chat-app-puce-psi.vercel.app',
         methods: ['POST', 'GET'],
         credentials: true
     }
@@ -81,7 +81,7 @@ const port = Number(process.env.PORT) || 5000;
 const start = (port) => {
     server.listen(port, () => {
         process.stdout.write('Server Deployed on:');
-        console.log(`\x1b[33m`, `https://chat-app-production-df1f.up.railway.app/`);
+        console.log(`\x1b[33m`, `https://localhost:${port}/`);
     });
 };
 let idMap = {};

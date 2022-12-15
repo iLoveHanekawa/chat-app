@@ -33,7 +33,7 @@ function Form(props: FormType) {
   const botSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     await dispatch(fetchData({
-      url: 'chat-app-production-df1f.up.railway.app/api/v1/',
+      url: 'https://chat-app-production-df1f.up.railway.app/api/v1/',
       body: {
         data: {
             msg: text,

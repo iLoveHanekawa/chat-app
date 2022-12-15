@@ -4,30 +4,37 @@ import { GiVintageRobot } from 'react-icons/gi'
 import { Socket } from 'socket.io-client'
 import { DefaultEventsMap } from 'socket.io/dist/typed-events'
 import { FaUserCircle } from 'react-icons/fa'
+import { useSelector, useDispatch } from 'react-redux'
+import { AppDispatch, StateType } from '../../app/store'
+import { indexActions } from '../../features/active'
+import { recipientActions } from '../../features/recipient'
 
 type ContactsType = {
-    active: number
-    setActive: React.Dispatch<SetStateAction<number>>
     socket: Socket<DefaultEventsMap, DefaultEventsMap> | null
-    setRecipient: React.Dispatch<SetStateAction<string>>
 }
 
 function Contacts(props: ContactsType) {
-    
-    const [list, setList] = React.useState<{id: string, animal: string}[]>([{id: 'bot', animal: 'Chat assistant'}])
+    const dispatch: AppDispatch = useDispatch()
+    const recipient = useSelector((state: StateType) => state.recipient.id)
+    const activeIndex = useSelector((state: StateType) => { return state.activeElement.index })
+    const [list, setList] = React.useState<{id: string, animal: string}[]>([{id: 'bot', animal: 'Atlas'}])
     React.useEffect(() => {
         props.socket?.on('newUser', (id: string, animal: string) => {
             setList(i => [...i, { id: id, animal: 'Anonymous ' + animal }])
         })
     }, [])
+    console.log(list);
+    
   return (
-    <ul className = 'h-4/6 scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-300 text-gray-500 flex flex-col'>
+    <ul className = 'h-4/6 scrollbar-thin border-r-2 border-gray-200 scrollbar-thumb-rounded-full scrollbar-thumb-gray-300 text-gray-500 flex flex-col'>
         {
             list.map(({id, animal}, index) => {
                 return <li onClick = {() => {
-                    props.setActive(index)
-                    props.setRecipient(id)
-                }} className = {`${props.active === index? 'bg-teal-600 text-white': 'text-teal-600 hover:bg-teal-600'} cursor-pointer shadow-md hover:text-white transition duration-500 flex justify-start items-center gap-4 w-full pl-3 py-5 lg:text-5xl md:text-4xl sm:text-2xl`} key = {index}>{index === 0? <GiVintageRobot />: <FaUserCircle />}<div className = 'lg:text-lg md:text-md sm:text-sm'>{animal}</div></li>
+                    dispatch(indexActions.setindex(index))
+                    dispatch(recipientActions.setRecipientId(id)) 
+                    if(recipient != 'bot') props.socket?.emit('leave', props.socket.id, recipient)  
+                    props.socket?.emit('join', props.socket.id, id)
+                }} className = {`${activeIndex === index? 'bg-teal-600 text-white': 'text-teal-600 hover:bg-teal-600'} cursor-pointer shadow-md hover:text-white transition duration-500 flex justify-start items-center gap-4 w-full pl-3 py-5 lg:text-5xl md:text-4xl sm:text-2xl`} key = {index}>{index === 0? <GiVintageRobot />: <FaUserCircle />}<div className = 'lg:text-lg md:text-md sm:text-sm'>{animal}</div></li>
             })
         }
     </ul>

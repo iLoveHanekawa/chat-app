@@ -90,9 +90,15 @@ io.on('connect', (socket) => {
     socket.on('disconnect', () => {
         console.log('User disconnected');
     });
-    socket.on('message', (msg, sendTo) => {
+    socket.on('message', (msg, sendTo, sentBy) => {
         console.log(sendTo);
-        socket.to(sendTo).emit('message', msg);
+        socket.to(sendTo).emit('message', msg, 'Anonymous ' + idMap[sentBy]);
+    });
+    socket.on('join', (joinedby, joinedto) => {
+        socket.to(joinedto).emit('joinMessage', idMap[joinedby]);
+    });
+    socket.on('leave', (leftBy, left) => {
+        socket.to(left).emit('leftMessage', idMap[leftBy]);
     });
     socket.on('newUser', id => {
         const num = Math.floor(Math.random() * (animals_1.animals.length - 1));
@@ -109,5 +115,11 @@ io.on('connect', (socket) => {
                 io.to(id).emit('newUser', val.id, idMap[val.id]);
         });
     }));
+    socket.on('typing', (room, typingId) => {
+        socket.broadcast.to(room).emit('typingEvent', 'Anonymous ' + idMap[typingId] + ' is typing...');
+    });
+    socket.on('stopTyping', (room) => {
+        socket.broadcast.to(room).emit('stopTypingEvent');
+    });
 });
 start(port);

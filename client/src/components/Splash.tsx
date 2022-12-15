@@ -10,6 +10,7 @@ type SplashType = {
 }
 
 function Splash(props: SplashType) {
+
     const navigate = useNavigate()
   return (
     <div className = 'w-screen overflow-hidden relative md:static flex justify-between items-center h-screen px-32'>

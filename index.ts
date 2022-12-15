@@ -38,7 +38,6 @@ app.post('/api/v1/', async (req: Request, res: Response) => {
     max_tokens: 2000
   });
   console.log(completion.data.choices[0].text);
-  
   res.status(200).json({ result: completion.data.choices[0].text });
 })
 
@@ -67,9 +66,15 @@ io.on('connect', (socket) => {
   socket.on('disconnect', () => {
     console.log('User disconnected');
   })
-  socket.on('message', (msg, sendTo) => {
+  socket.on('message', (msg, sendTo, sentBy) => {
     console.log(sendTo); 
-    socket.to(sendTo).emit('message', msg)
+    socket.to(sendTo).emit('message', msg, 'Anonymous ' + idMap[sentBy])
+  })
+  socket.on('join', (joinedby, joinedto) => {
+    socket.to(joinedto).emit('joinMessage', idMap[joinedby])
+  })
+  socket.on('leave', (leftBy, left) => {
+    socket.to(left).emit('leftMessage', idMap[leftBy])
   })
   socket.on('newUser', id => {
     const num = Math.floor(Math.random() * (animals.length - 1))
@@ -84,6 +89,12 @@ io.on('connect', (socket) => {
       console.log(idMap)
       if(val.id !== id) io.to(id).emit('newUser', val.id, idMap[val.id])
     })
+  })
+  socket.on('typing', (room, typingId) => {
+    socket.broadcast.to(room).emit('typingEvent', 'Anonymous ' + idMap[typingId] + ' is typing...')
+  })
+  socket.on('stopTyping', (room) => {
+    socket.broadcast.to(room).emit('stopTypingEvent')
   })
 })
 

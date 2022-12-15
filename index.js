@@ -46,8 +46,10 @@ const app = (0, express_1.default)();
 const server = http.createServer(app);
 const io = new socket_io_1.Server(server, {
     cors: {
-        origin: '*',
-        methods: ['POST', 'GET']
+        origin: 'https://chat-app-production-df1f.up.railway.app/',
+        methods: ['POST', 'GET'],
+        allowedHeaders: ["my-custom-header"],
+        credentials: true
     }
 });
 app.use(express_1.default.json());

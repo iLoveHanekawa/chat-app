@@ -44,7 +44,7 @@ function List(props: ListType) {
                 </div>
                 return <div key = {i} ref = {strayRef} className = 'flex mb-7 flex-col'>
                     {!isSent? <div className = 'text-gray-400 self-start text-xs'>{sentBy}</div>: <div className = 'text-gray-400 self-end text-xs'>You</div>}
-                    <li className = {`${isSent? 'sent': 'received'} max-w-4/5`}>
+                    <li className = {`${isSent? 'sent': 'received'} max-w-4/5 md:text-md text-sm`}>
                     { msg }
                     </li>
                     <div className = {`${isSent? 'self-end': 'self-start'} text-teal-300 text-xs mt-1`}>{time.toString()}</div>

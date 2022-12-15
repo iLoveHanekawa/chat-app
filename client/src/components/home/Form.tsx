@@ -81,8 +81,8 @@ function Form(props: FormType) {
                   props.socket?.emit('typing', recipient, props.socket.id)
                 }} onChange = {(e) => {
                   setText(e.currentTarget.value)
-                }} type = 'text' placeholder='Type messsage' className = 'text-gray-400 focus:outline-none indent-2 w-full' />
-                <button className = 'font-bold hover:scale-105 rounded-md py-2 px-4 w-20 transition duration-500 bg-teal-600 text-white'>Send</button>
+                }} type = 'text' placeholder='Type messsage' className = 'text-gray-400 pr-4 text-xs sm:text-sm md:text-md focus:outline-none indent-2 w-full' />
+                <button className = 'font-bold hover:scale-105 rounded-md py-1 sm:py-2 px-2 sm:px-4 w-20 md:text-md sm:text-sm text-xs transition duration-500 bg-teal-600 z-10 text-white'>Send</button>
             </form>
         </div>
     </div>

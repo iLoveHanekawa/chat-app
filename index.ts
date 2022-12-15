@@ -54,8 +54,8 @@ const port = Number(process.env.PORT) || 5000
 
 const start = (port: number) => { 
     server.listen(port, () => {
-      process.stdout.write('Local Server:')
-      console.log(`\x1b[33m`, ` http://localhost:${port}`);
+      process.stdout.write('Server Deployed on:')
+      console.log(`\x1b[33m`, `https://chat-app-production-df1f.up.railway.app/`);
     })  
 }
 

@@ -46,7 +46,7 @@ const app = (0, express_1.default)();
 const server = http.createServer(app);
 const io = new socket_io_1.Server(server, {
     cors: {
-        origin: ['https://chat-app-ilovehanekawa.vercel.app/', 'http://127.0.0.1:5173/'],
+        origin: '*',
         methods: ['POST', 'GET']
     }
 });

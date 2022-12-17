@@ -63,6 +63,7 @@ function Form(props: FormType) {
           {loading && <div className = 'ml-2 text-xs text-gray-400'>Atlas is typing...</div>}
           {typing.status && <div className = 'ml-2 text-xs text-gray-400'>{typing.msg}</div>}
             <form onSubmit={(e) => {
+              setTaHeight('auto')
               if(activeIndex > 0) {
                 props.socket?.emit('stopTyping', recipient)
                 userSubmit(e)
@@ -71,6 +72,7 @@ function Form(props: FormType) {
                 props.setMsgs(i => [...i,{isSent: true, msg: text, sentBy: props.socket?.id as string }])
                 botSubmit(e)
               }
+              setText('')
             }} className = 'flex w-full p-1 px-1'>
                 <textarea ref = {taRef} style = {{
                   height: taHeight

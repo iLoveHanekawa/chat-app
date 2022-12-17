@@ -32,7 +32,7 @@ function Splash(props: SplashType) {
                         socket.emit('oldUsers', socket.id)
                     })
                     props.setSocket(socket)
-                    navigate('/home') }} className='rounded-md hover:scale-110 w-full self-center transition duration-500 mt-12 py-1 md:py-2 items-center justify-center lg:px-16 md:px-12 px-8 text-sm md:text-md gap-2 font-bold text-teal-700 border-2 border-teal-700 hover:bg-teal-700 hover:text-white flex'>
+                    navigate('/home') }} className='rounded-md hover:scale-110 w-full self-center transition duration-500 mt-12 py-1 md:py-2 items-center justify-center lg:px-16 md:px-12 px-8 text-sm md:text-md gap-2 font-bold md:text-teal-700 md:border-2 md:bg-white bg-teal-700 text-white md:border-teal-700 md:hover:bg-teal-700 md:hover:text-white flex'>
                     Start Texting
                 </button>
             </div>

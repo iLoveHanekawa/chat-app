@@ -15,20 +15,20 @@ function App() {
   const [hideNav, setHideNav] = React.useState<boolean>(true)
   return (
     <div className = 'w-screen relative font-nunito h-screen'>
-      <nav className = 'w-full flex fixed shadow-sm shadow-gray-600 top-0 left-0 bg-teal-800 text-white items-center justify-between gap-1 z-20 pl-3 py-1'>
+      <nav className = 'w-full flex fixed shadow-sm shadow-gray-600 top-0 left-0 bg-teal-800 text-white items-center justify-between gap-1 z-20 pl-3 py-5 md:py-1'>
         <div className='flex justify-start items-center gap-1'>
           <GiHamburgerMenu onClick = {() => {
-            setHideNav(i => !i)
-          }} className = {`md:hidden cursor-pointer text-xl mr-2 ${pathname !== '/'? '': 'cursor-not-allowed'}`} />
+            if(pathname !== '/') setHideNav(i => !i)
+          }} className = {`md:hidden cursor-pointer text-2xl md:text-xl mr-2 ${pathname !== '/'? '': 'cursor-not-allowed'}`} />
           <div className = 'text-lg'>
-            <IoChatbubblesOutline/>
+            <IoChatbubblesOutline className = 'md:text-md text-2xl'/>
           </div>
           <div>
             IntelliChat
           </div>
         </div>
         <a href='https://github.com/iLoveHanekawa/chat-app' target = "_blank">
-          <AiFillGithub className = 'text-white text-2xl mr-2' />
+          <AiFillGithub className = 'text-white md:text-md text-3xl mr-2' />
         </a>
       </nav>
       <Routes>

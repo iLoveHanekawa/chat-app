@@ -17,9 +17,11 @@ type FormType = {
 }
 
 
+
 function Form(props: FormType) {
   const dispatch: AppDispatch = useDispatch()
   const recipient = useSelector((state: StateType) => state.recipient.id)
+  const [taHeight, setTaHeight] = React.useState<number | string>('auto')
   const result = useSelector((state: StateType) => state.atlas.result)
   const loading = useSelector((state: StateType) => state.atlas.loading)
   const activeIndex = useSelector((state: StateType) => { return state.activeElement.index })
@@ -43,7 +45,7 @@ function Form(props: FormType) {
   }
 
   const [typing, setTyping] = React.useState({ status: false, msg: ''})
-
+  const taRef = React.useRef() as MutableRefObject<HTMLTextAreaElement>
   React.useEffect(() => {
     if(result != '') props.setMsgs(i => [...i, { isSent: false, msg: result, sentBy: 'Atlas' }])
   }, [result])
@@ -51,7 +53,6 @@ function Form(props: FormType) {
   React.useEffect(() => {
     props.socket?.on('typingEvent', msg => {
       setTyping({ status: true, msg: msg })
-
     })
     props.socket?.on('stopTypingEvent', () => {
       setTyping({ status: false, msg: '' })
@@ -72,17 +73,21 @@ function Form(props: FormType) {
                 props.setMsgs(i => [...i,{isSent: true, msg: text, sentBy: props.socket?.id as string }])
                 botSubmit(e)
               }
-            }} className = 'flex w-full p-1 px-3'>
-                <input value = {text} onKeyUp = {(e) => {
+            }} className = 'flex w-full p-1 px-1'>
+                <textarea ref = {taRef} style = {{
+                  height: taHeight
+                }} value = {text} onKeyUp = {(e) => {
                   setTimeout(() => { 
                     props.socket?.emit('stopTyping', recipient)
                   }, 2000)
                 }} onKeyDown = {(e) => {
+                  setTaHeight('auto')
                   props.socket?.emit('typing', recipient, props.socket.id)
                 }} onChange = {(e) => {
+                  if(e.currentTarget.scrollHeight != taHeight) setTaHeight(e.currentTarget.scrollHeight)
                   setText(e.currentTarget.value)
-                }} type = 'text' placeholder='Type messsage' className = 'text-gray-400 pr-4 text-xs sm:text-sm md:text-md focus:outline-none indent-2 w-full' />
-                <button className = 'font-bold hover:scale-105 rounded-md py-1 sm:py-2 px-2 sm:px-4 w-20 md:text-md sm:text-sm text-xs transition duration-500 bg-teal-600 z-10 text-white'>Send</button>
+                }} placeholder='Type messsage' rows={1} className = 'text-gray-400 z-20 pr-4 text-sm md:text-md focus:outline-none py-2 pl-2 max-h-min w-full' />
+                <button className = 'font-bold hover:scale-105 rounded-md py-1 sm:py-2 w-20 md:text-md sm:text-sm text-xs transition duration-500 bg-teal-600 z-10 h-10 self-end text-white'>Send</button>
             </form>
         </div>
     </div>

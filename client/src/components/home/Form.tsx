@@ -16,8 +16,6 @@ type FormType = {
   listRef: MutableRefObject<HTMLDivElement | null>
 }
 
-
-
 function Form(props: FormType) {
   const dispatch: AppDispatch = useDispatch()
   const recipient = useSelector((state: StateType) => state.recipient.id)

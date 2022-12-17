@@ -35,7 +35,7 @@ function List(props: ListType) {
     }, [strayRef.current?.clientHeight, props.msgs.length])
 
   return (
-    <div ref = {props.listRef} className = 'border-l-2 py-8 border-teal-100 z-10 w-full mt-10 md:w-4/6 overflow-scroll h-nvh overflow-x-hidden right-0 top-0 absolute customScrollbar'>
+    <div ref = {props.listRef} className = 'border-l-2 py-8 border-teal-100 z-10 w-full mt-10 md:mt-2 md:w-4/6 overflow-scroll h-nvh overflow-x-hidden right-0 top-0 absolute customScrollbar'>
         <ul className = 'flex flex-col py-1 px-3'>
             {props.msgs.map(({ isSent, msg, sentBy }: { isSent: boolean, msg: string, sentBy: string }, i: number) => {
                 const time = new Date(Date.now())

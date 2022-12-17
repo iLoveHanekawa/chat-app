@@ -31,7 +31,7 @@ function Home(props: HomeType) {
   }, [eh])
 
   return (
-    <div className = 'w-screen h-screen relative'>
+    <div className = 'w-screen h-screen relative overflow-hidden'>
       <div className = {`${props.hideNav? '': 'z-20'} md:hidden h-screen absolute top-0 left-0 w-2/3`}>
         <NavTray setHideNav = {props.setHideNav} hideNav = {props.hideNav} socket = {props.socket} />
       </div>

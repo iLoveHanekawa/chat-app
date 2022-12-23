@@ -14,12 +14,12 @@ type NavTrayType = {
 function NavTray(props: NavTrayType) {  
 
   return (
-    <div className = {`${props.hideNav? '-scale-x-50':''} h-full bg-white border-r-2 border-gray-200 origin-left transition duration-200 w-full flex flex-col`}>
+    <div className = {`${props.hideNav? '-scale-x-50':''} h-full bg-white origin-left transition duration-200 w-full flex flex-col`}>
       <div className = 'h-2/6 bg-teal-700 flex flex-col pr-10'>
         <MdNavigateBefore onClick = {() => {
           props.setHideNav(i => !i)
-        }} className = 'text-white text-5xl cursor-pointer -ml-2' />
-          <div className = 'text-white pt-12 pl-4 lg:text-5xl md:text-4xl text-3xl font-bold flex items-end gap-3'>
+        }} className = 'text-white text-5xl mt-16 cursor-pointer ml-2' />
+          <div className = 'text-white pt-3 pl-4 lg:text-5xl md:text-4xl text-3xl font-bold flex items-end gap-3'>
             <div className = 'lg:text-7xl pl-4 md:text-5xl text-4xl'>
               <RiContactsLine />
             </div>

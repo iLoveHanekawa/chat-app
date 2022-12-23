@@ -59,7 +59,7 @@ function Form(props: FormType) {
 
   return (
     <div className = 'w-screen'>
-        <div className = 'md:w-4/6 w-full border-l-2 border-teal-100 absolute right-0 bottom-0'>
+        <div className = 'md:w-4/6 w-full absolute right-0 bottom-0'>
           {loading && <div className = 'ml-2 text-xs text-gray-400'>Atlas is typing...</div>}
           {typing.status && <div className = 'ml-2 text-xs text-gray-400'>{typing.msg}</div>}
             <form onSubmit={(e) => {

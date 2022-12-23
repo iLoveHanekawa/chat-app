@@ -15,7 +15,7 @@ function App() {
   const [hideNav, setHideNav] = React.useState<boolean>(true)
   return (
     <div className = 'w-screen relative font-nunito h-screen'>
-      <nav className = 'w-full flex fixed shadow-sm shadow-gray-600 top-0 left-0 bg-teal-800 text-white items-center justify-between gap-1 z-20 pl-3 py-5 md:py-1'>
+      <nav className = 'w-full flex fixed top-0 left-0 bg-teal-800 text-white items-center justify-between gap-1 z-20 pl-3 py-5 md:py-1'>
         <div className='flex justify-start items-center gap-1'>
           <GiHamburgerMenu onClick = {() => {
             if(pathname !== '/') setHideNav(i => !i)

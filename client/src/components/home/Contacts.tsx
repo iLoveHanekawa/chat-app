@@ -34,7 +34,7 @@ function Contacts(props: ContactsType) {
                     dispatch(recipientActions.setRecipientId(id)) 
                     if(recipient != 'bot') props.socket?.emit('leave', props.socket.id, recipient)  
                     props.socket?.emit('join', props.socket.id, id)
-                }} className = {`${activeIndex === index? 'bg-teal-600 text-white': 'text-teal-600 hover:bg-teal-600'} cursor-pointer shadow-md hover:text-white transition duration-500 flex justify-start items-center gap-4 w-full pl-3 py-5 lg:text-5xl md:text-4xl text-4xl`} key = {index}>
+                }} className = {`${activeIndex === index? 'bg-pink-600 text-white': 'text-pink-600 hover:bg-pink-600'} cursor-pointer shadow-md hover:text-white transition duration-500 flex justify-start items-center gap-4 w-full pl-3 py-5 lg:text-5xl md:text-4xl text-4xl`} key = {index}>
                     {index === 0? <GiVintageRobot />: <FaUserCircle />}
                     <div className = 'lg:text-lg md:text-md sm:text-xs text-xs'>{animal}</div>
                     </li>

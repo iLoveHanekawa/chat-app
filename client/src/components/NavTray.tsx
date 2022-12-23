@@ -15,7 +15,7 @@ function NavTray(props: NavTrayType) {
 
   return (
     <div className = {`${props.hideNav? '-scale-x-50':''} h-full bg-white origin-left transition duration-200 w-full flex flex-col`}>
-      <div className = 'h-2/6 bg-teal-700 flex flex-col pr-10'>
+      <div className = 'h-2/6 bg-pink-700 flex flex-col pr-10'>
         <MdNavigateBefore onClick = {() => {
           props.setHideNav(i => !i)
         }} className = 'text-white text-5xl mt-16 cursor-pointer ml-2' />

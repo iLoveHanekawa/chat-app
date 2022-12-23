@@ -47,7 +47,7 @@ function List(props: ListType) {
                     <li className = {`${isSent? 'sent': 'received'} max-w-4/5 md:text-md text-sm`}>
                     { msg }
                     </li>
-                    <div className = {`${isSent? 'self-end': 'self-start'} text-teal-300 text-xs mt-1`}>{time.toString()}</div>
+                    <div className = {`${isSent? 'self-end': 'self-start'} text-pink-300 text-xs mt-1`}>{time.toString()}</div>
                 </div>
             })}
         </ul>

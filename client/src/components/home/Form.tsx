@@ -4,7 +4,6 @@ import { DefaultEventsMap } from 'socket.io/dist/typed-events'
 import { useSelector, useDispatch } from 'react-redux'
 import { StateType, AppDispatch } from '../../app/store'
 import { fetchData } from '../../features/atlas'
-import axios from 'axios'
 
 type FormType = {
   setMsgs: React.Dispatch<React.SetStateAction<{
@@ -25,15 +24,13 @@ function Form(props: FormType) {
   const activeIndex = useSelector((state: StateType) => { return state.activeElement.index })
   const [text, setText] = React.useState('')
   const userSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
     props.setMsgs(i => [...i, { isSent: true, msg: text, sentBy: props.socket?.id as string}])
     props.socket?.emit('message', text, recipient, props.socket.id)
   }
   
   const botSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
     await dispatch(fetchData({
-      url: 'https://intellichat.onrender.com//api/v1/',
+      url: 'https://intellichat.onrender.com/api/v1/',
       body: {
         data: {
             msg: text,
@@ -63,16 +60,19 @@ function Form(props: FormType) {
           {loading && <div className = 'ml-2 text-xs text-gray-400'>Atlas is typing...</div>}
           {typing.status && <div className = 'ml-2 text-xs text-gray-400'>{typing.msg}</div>}
             <form onSubmit={(e) => {
-              setTaHeight('auto')
-              if(activeIndex > 0) {
-                props.socket?.emit('stopTyping', recipient)
-                userSubmit(e)
+              e.preventDefault()
+              if(text !== '') {
+                setTaHeight('auto')
+                if(activeIndex > 0) {
+                  props.socket?.emit('stopTyping', recipient)
+                  userSubmit(e)
+                }
+                else {
+                  props.setMsgs(i => [...i,{isSent: true, msg: text, sentBy: props.socket?.id as string }])
+                  botSubmit(e)
+                }
+                setText('')
               }
-              else {
-                props.setMsgs(i => [...i,{isSent: true, msg: text, sentBy: props.socket?.id as string }])
-                botSubmit(e)
-              }
-              setText('')
             }} className = 'flex w-full p-1 px-1'>
                 <textarea ref = {taRef} style = {{
                   height: taHeight
@@ -87,7 +87,7 @@ function Form(props: FormType) {
                   if(e.currentTarget.scrollHeight != taHeight) setTaHeight(e.currentTarget.scrollHeight)
                   setText(e.currentTarget.value)
                 }} placeholder='Type messsage' rows={1} className = 'text-gray-400 z-20 pr-4 text-sm md:text-md focus:outline-none py-2 pl-2 max-h-min w-full' />
-                <button className = 'font-bold hover:scale-105 rounded-md py-1 sm:py-2 w-20 md:text-md sm:text-sm text-xs transition duration-500 bg-teal-600 z-10 h-10 self-end text-white'>Send</button>
+                <button className = 'font-bold hover:scale-105 rounded-md py-1 sm:py-2 w-20 md:text-md sm:text-sm text-xs transition duration-500 bg-pink-600 z-10 h-10 self-end text-white'>Send</button>
             </form>
         </div>
     </div>

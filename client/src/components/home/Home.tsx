@@ -36,7 +36,7 @@ function Home(props: HomeType) {
         <NavTray setHideNav = {props.setHideNav} hideNav = {props.hideNav} socket = {props.socket} />
       </div>
       <div className = 'hidden shadow-md shadow-gray-200 md:w-2/6 flex-col absolute md:flex h-full left-0 top-0'>
-        <div className = 'h-2/6 bg-teal-600 flex flex-col pt-24 pl-10'>
+        <div className = 'h-2/6 bg-pink-600 flex flex-col pt-24 pl-10'>
           <div className = 'text-white lg:text-5xl md:text-4xl text-3xl font-bold flex pr-5 items-end gap-3'>
             <div className = 'lg:text-7xl md:text-5xl text-4xl'>
               <RiContactsLine />

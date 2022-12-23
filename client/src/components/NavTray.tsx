@@ -24,7 +24,7 @@ function NavTray(props: NavTrayType) {
               <RiContactsLine />
             </div>
             Contacts</div>
-          <div className='mt-2 text-gray-200 text-xs pl-12'>Everyone's offline? Text with the AI assistant</div>
+          <div className='mt-2 text-gray-200 text-xxs pl-12'>Everyone's offline? Text with the AI assistant</div>
       </div>
       <Contacts socket = { props.socket } />
     </div>

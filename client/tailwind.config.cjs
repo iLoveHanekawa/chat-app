@@ -7,7 +7,8 @@ module.exports = {
     extend: {
       fontSize: {
         vvl: '28rem',
-        vl: '16rem'
+        vl: '16rem',
+        'xxs': '0.5rem'
       },
       
       brightness: {

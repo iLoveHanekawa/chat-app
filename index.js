@@ -73,8 +73,7 @@ app.post('/api/v1/', (req, res) => __awaiter(void 0, void 0, void 0, function* (
     res.status(200).json({ result: completion.data.choices[0].text });
 }));
 function generatePrompt(str) {
-    const capPrompt = str[0].toUpperCase() + str.slice(1).toLowerCase();
-    console.log(capPrompt);
+    const capPrompt = str;
     return str;
 }
 app.use((0, cors_1.default)());

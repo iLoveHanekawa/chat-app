@@ -45,9 +45,7 @@ app.post('/api/v1/', async (req: Request, res: Response) => {
 })
 
 function generatePrompt(str: string) {
-  const capPrompt =
-    str[0].toUpperCase() + str.slice(1).toLowerCase();
-    console.log(capPrompt);
+  const capPrompt = str
   return str;
 }
 

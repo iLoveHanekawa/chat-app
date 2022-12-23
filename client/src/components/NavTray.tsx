@@ -18,7 +18,7 @@ function NavTray(props: NavTrayType) {
       <div className = 'h-2/6 bg-pink-700 flex flex-col pr-10'>
         <MdNavigateBefore onClick = {() => {
           props.setHideNav(i => !i)
-        }} className = 'text-white text-4xl mt-16 cursor-pointer' />
+        }} className = 'text-white text-4xl mt-12 cursor-pointer' />
           <div className = 'text-white pt-3 pl-4 lg:text-5xl md:text-4xl text-xl font-bold flex items-end gap-3'>
             <div className = 'lg:text-7xl pl-4 md:text-5xl text-3xl'>
               <RiContactsLine />

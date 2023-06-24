@@ -90,11 +90,17 @@ io.on('connect', (socket) => {
     idMap = { ...idMap, [id]: animals[num]}
   })  
   socket.on('oldUsers', async (id) => {
-    const sockets = await io.fetchSockets() 
-    sockets.forEach((val, index) => {
-      console.log(idMap)
-      if(val.id !== id) io.to(id).emit('newUser', val.id, idMap[val.id])
-    })
+    try {
+      const sockets = await io.fetchSockets() 
+      sockets.forEach((val, index) => {
+        console.log(idMap)
+        if(val.id !== id) io.to(id).emit('newUser', val.id, idMap[val.id])
+      })
+    }
+    catch(error) {
+      if(error instanceof Error) console.log(error.message);
+      else console.log(error);
+    }
   })
   socket.on('typing', (room, typingId) => {
     socket.broadcast.to(room).emit('typingEvent', 'Anonymous ' + idMap[typingId] + ' is typing...')

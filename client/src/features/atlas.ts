@@ -8,10 +8,16 @@ const initialState = {
 }
 
 export const fetchData = createAsyncThunk('fetch', async (thunkObj: { url: string, body: {data: { msg: string }} } ) => {
-    const { url, body } = thunkObj
-    const res = await axios.post(url, body)
-    const data = await res.data
-    return data.result
+    try {
+        const { url, body } = thunkObj
+        const res = await axios.post(url, body)
+        const data = await res.data
+        return data.result
+    }
+    catch(error) {
+        if(error instanceof Error) return error.message;
+        else return 'Something went wrong.';
+    }
 })
 
 const atlasSlice = createSlice({

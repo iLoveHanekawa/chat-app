@@ -29,14 +29,20 @@ function Form(props: FormType) {
   }
   
   const botSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    await dispatch(fetchData({
-      url: 'https://intellichat.onrender.com/api/v1/',
-      body: {
-        data: {
-            msg: text,
+    try {
+      await dispatch(fetchData({
+        url: 'https://intellichat.onrender.com/api/v1/',
+        body: {
+          data: {
+              msg: text,
+          }
         }
-      }
-    }))
+      }))
+    }
+    catch(error) {
+      if(error instanceof Error) console.log(error.message);
+      else console.log(error);
+    }
   }
 
   const [typing, setTyping] = React.useState({ status: false, msg: ''})

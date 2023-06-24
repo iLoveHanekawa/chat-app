@@ -10,7 +10,11 @@ export const fetchData = createAsyncThunk('fetch', async (thunkObj: { url: strin
     try {
         const { url, body } = thunkObj
         const res = await fetch(url, {
-            body: JSON.stringify(body)
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json'
+            }
         });
         const data = await res.json();
         return data.result

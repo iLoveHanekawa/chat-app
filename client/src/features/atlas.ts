@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
 
 const initialState = {
     result: '',
@@ -10,8 +9,10 @@ const initialState = {
 export const fetchData = createAsyncThunk('fetch', async (thunkObj: { url: string, body: {data: { msg: string }} } ) => {
     try {
         const { url, body } = thunkObj
-        const res = await axios.post(url, body)
-        const data = await res.data
+        const res = await fetch(url, {
+            body: JSON.stringify(body)
+        });
+        const data = await res.json();
         return data.result
     }
     catch(error) {

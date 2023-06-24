@@ -30,18 +30,23 @@ app.get('/', (req: Request, res: Response) => {
 })
 
 app.post('/api/v1/', async (req: Request, res: Response) => {
-  const { msg } = req.body.data
-  console.log(msg);
-  
-  
-  const completion = await openai.createCompletion({
-    model: "text-davinci-003",
-    prompt: generatePrompt(msg),
-    temperature: 0.6,
-    max_tokens: 2000
-  });
-  console.log(completion.data.choices[0].text);
-  res.status(200).json({ result: completion.data.choices[0].text });
+  try {
+    const { msg } = req.body.data
+    console.log(msg);
+    
+    
+    const completion = await openai.createCompletion({
+      model: "text-davinci-003",
+      prompt: generatePrompt(msg),
+      temperature: 0.6,
+      max_tokens: 2000
+    });
+    console.log(completion.data.choices[0].text);
+    res.status(200).json({ result: completion.data.choices[0].text });
+  } catch (error) {
+    if(error instanceof Error) console.log(error.message);
+    else console.log(error);
+  }
 })
 
 function generatePrompt(str: string) {
